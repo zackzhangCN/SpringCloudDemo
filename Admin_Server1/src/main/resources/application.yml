@@ -1,0 +1,49 @@
+server:
+  port: 8000
+spring:
+  application:
+    name: admin-server
+  # 添加认证用户信息
+  security:
+    user:
+      name: user
+      password: 123456
+      roles:
+        -ADMIN
+
+eureka:
+  instance:
+    # 是否注册到eureka注册中心
+    prefer-ip-address: true
+    # 由于此应用开启了安全认证,因此注册到eureka server时需要提供自己的认证账号,否则eureka server无法管理此应用
+    metadata-map:
+      user.name: ${spring.security.user.name}
+      user.password: ${spring.security.user.password}
+  client:
+    # 从注册中心拉去服务注册信息的间隔(秒)
+    registry-fetch-interval-seconds: 5
+    # eureka注册中心地址(由于两个注册中心互相注册进行数据同步, 因此这里随便注册到哪一个eureka都可以)
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka,http://localhost:8762/eureka
+    # 开启健康检查
+    healthcheck:
+      enabled: true
+
+# 通过info.*添加公开的应用信息
+info:
+  app:
+    name: admin-server
+    encoding: utf-8
+    java:
+      source: 1.8
+      target: 1.8
+
+# 开启actuator的refresh端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

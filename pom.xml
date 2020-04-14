@@ -3,21 +3,36 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example</groupId>
-	<artifactId>demo</artifactId>
+	<groupId>cn.zack</groupId>
+	<artifactId>SpringCloudExample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+	<!--jar包-->
+	<packaging>pom</packaging>
 
-	<name>demo</name>
-	<description>Demo project for Spring Boot</description>
+	<name>SpringCloudExample</name>
+	<description>SpringCloudDemo project for Spring Boot</description>
 
+	<!--引入springboot父依赖-->
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.0.1.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>2.0.3.RELEASE</version>
+		<relativePath/>
 	</parent>
 
+	<!--包含模块-->
+	<modules>
+		<module>Admin_Server1</module>
+		<module>Api_Zuul</module>
+		<module>Example_Eureka1</module>
+		<module>Example_Eureka2</module>
+		<module>Microservice_Consumer1</module>
+		<module>Microservice_Consumer2</module>
+		<module>Microservice_Example1</module>
+		<module>Microservice_Example2</module>
+    </modules>
+
+	<!--字符集UTF-8, JDK版本1.8-->
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -25,26 +40,100 @@
 	</properties>
 
 	<dependencies>
+		<!--所有模块引入actuator监控-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
+		<!--所有模块引入slf4j日志框架-->
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-test</artifactId>
-			<scope>test</scope>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.7.25</version>
 		</dependency>
 	</dependencies>
 
+	<dependencyManagement>
+		<dependencies>
+			<!--声明springCloud的版本-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-dependencies</artifactId>
+				<version>Finchley.SR3</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+			<!--声明web版本-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-web</artifactId>
+				<version>2.0.3.RELEASE</version>
+			</dependency>
+			<!--声明security版本-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-security</artifactId>
+				<version>2.0.3.RELEASE</version>
+			</dependency>
+			<!--声明ribbon负载均衡的版本-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
+				<version>2.0.3.RELEASE</version>
+			</dependency>
+			<!--声明feign版本-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-feign</artifactId>
+				<version>2.0.3.RELEASE</version>
+			</dependency>
+			<!--声明eureka server版本-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
+				<version>2.0.3.RELEASE</version>
+			</dependency>
+			<!--声明eureka client版本-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+				<version>2.0.3.RELEASE</version>
+			</dependency>
+			<!--声明springboot admin server版本-->
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-server</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<!--声明springboot admin client版本-->
+			<dependency>
+				<groupId>de.codecentric</groupId>
+				<artifactId>spring-boot-admin-starter-client</artifactId>
+				<version>2.0.1</version>
+			</dependency>
+			<!--声明zuul网关版本-->
+			<dependency>
+				<groupId>org.springframework.cloud</groupId>
+				<artifactId>spring-cloud-starter-netflix-zuul</artifactId>
+				<version>2.0.1.RELEASE</version>
+			</dependency>
+			<!--声明lombok版本-->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<optional>true</optional>
+				<version>1.16.22</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
 	<build>
 		<plugins>
+			<!--编译打包为可执行jar包, 不可缺少, 否则jar包执行报错-->
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>

@@ -1,0 +1,8 @@
+2020-04--14 14:42:30.266 [main] INFO  c.z.Microservice_Example1_Application - No active profile set, falling back to default profiles: default
+2020-04--14 14:46:45.719 [main] INFO  c.z.Microservice_Example1_Application - No active profile set, falling back to default profiles: default
+2020-04--14 14:57:40.491 [main] INFO  c.z.Microservice_Example1_Application - No active profile set, falling back to default profiles: default
+2020-04--14 14:57:44.928 [main] INFO  c.z.Microservice_Example1_Application - Started Microservice_Example1_Application in 6.386 seconds (JVM running for 7.402)
+2020-04--14 14:59:31.560 [main] INFO  c.z.Microservice_Example1_Application - No active profile set, falling back to default profiles: default
+2020-04--14 14:59:36.399 [main] INFO  c.z.Microservice_Example1_Application - Started Microservice_Example1_Application in 6.582 seconds (JVM running for 7.598)
+2020-04--14 15:24:17.647 [http-nio-8001-exec-2] INFO  cn.zack.controller.ExampleController - test入参======
+2020-04--14 15:30:14.518 [http-nio-8001-exec-10] INFO  cn.zack.controller.ExampleController - test入参======

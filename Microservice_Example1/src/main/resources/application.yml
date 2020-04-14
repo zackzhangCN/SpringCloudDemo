@@ -1,0 +1,45 @@
+server:
+  port: 8001
+
+# 应用名(微服务名)
+spring:
+  application:
+    name: microservice-example
+
+
+eureka:
+  instance:
+    # 是否注册到eureka server
+    prefer-ip-address: true
+    # 当前实例主机名
+    hostname: microservice_example1
+  client:
+    service-url:
+      # eureka server的地址
+      defaultZone: http://localhost:8762/eureka
+
+# 通过info.*添加公开的应用信息
+info:
+  app:
+    name: microservice-example1
+    encoding: utf-8
+    java:
+      source: 1.8
+      target: 1.8
+
+# 开启actuator的refresh端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  # 需要处理cn.zack包下打出的日志, 日志等级设置为debug
+  level:
+    cn.zack: debug
+  # 日志配置文件地址
+  config: classpath:logback-spring.xml

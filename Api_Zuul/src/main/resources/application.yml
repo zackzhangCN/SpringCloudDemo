@@ -1,0 +1,41 @@
+server:
+  port: 80
+spring:
+  application:
+    name: api-zuul
+eureka:
+  instance:
+    # 注册到eureka server
+    prefer-ip-address: true
+    # 主机名
+    hostname: api-zuul-1
+  client:
+    # 从注册中心拉去服务注册信息的间隔(秒)
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka,http://localhost:8762/eureka
+    # 开启健康检查
+    healthcheck:
+      enabled: true
+zuul:
+  # 自定义路由映射配置
+  routes:
+    consumer1-routes:
+      service-id: microservice-consumer1
+      path: /consumer1/**
+    consumer2-routes:
+      service-id: microservice-consumer2
+      path: /consumer2/**
+  # 忽略指定微服务, 多个微服务以逗号隔开, 忽略全部微服务用'*'
+#  ignored-services: '*'
+  # 更细粒度地忽略部分服务(例如consumer1微服务的四个方法, 不想暴露getFun1)
+  ignored-patterns: /**/getFun1/**
+  # 配置路由前缀
+  prefix: /api
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 30000

@@ -1,0 +1,44 @@
+server:
+  port: 8762
+
+spring:
+  application:
+    name: eureka-server
+eureka:
+  instance:
+    # 当前实例的主机名
+    hostname: eureka2
+  server:
+    # 关闭注册中心的自我保护机制
+    enable-self-preservation: false
+    # 服务续约时间(扫描失效服务的时间间隔)
+    eviction-interval-timer-in-ms: 5000
+
+  client:
+    # 是否将自身注册到eureka server(默认为true)
+    register-with-eureka: true
+    # 是否从eureka server获取注册信息(默认为true),单机版eureka不需要同步其他eureka server的信息
+    fetch-registry: true
+    # eureka server交互地址,查询和注册服务都需要依赖这个地址,多个地址间使用,分割
+    service-url:
+      # 将eureka2注册到eureka1上, 便于同步服务注册信息
+      defaultZone: http://user:123456@localhost:8761/eureka/
+
+# 通过info.*添加公开的应用信息
+info:
+  app:
+    name: eureka2
+    encoding: utf-8
+    java:
+      source: 1.8
+      target: 1.8
+
+# 开启actuator的refresh端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always

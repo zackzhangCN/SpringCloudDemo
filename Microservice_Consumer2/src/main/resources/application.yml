@@ -1,0 +1,48 @@
+server:
+  port: 9002
+
+spring:
+  application:
+    name: microservice-consumer2
+eureka:
+  instance:
+    # 注册到注册中心
+    prefer-ip-address: true
+    hostname: microservice-consumer2
+  client:
+    # 从注册中心拉去服务注册信息的间隔(秒)
+    registry-fetch-interval-seconds: 5
+    service-url:
+      defaultZone: http://user:123456@localhost:8761/eureka,http://localhost:8762/eureka
+    # 开启健康检查
+    healthcheck:
+      enabled: true
+
+feign:
+  hystrix:
+    # 开启feign容错支持
+    enabled: true
+
+# 自定义调用microservice-example服务时的负载均衡策略, 随机策略
+microservice-example:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule
+
+# 通过info.*添加公开的应用信息
+info:
+  app:
+    name: microservice-consumer2
+    encoding: utf-8
+    java:
+      source: 1.8
+      target: 1.8
+
+# 开启actuator的refresh端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
