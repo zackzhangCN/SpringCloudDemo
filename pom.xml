@@ -6,7 +6,7 @@
 	<groupId>cn.zack</groupId>
 	<artifactId>SpringCloudExample</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<!--jar包-->
+	<!--pom包-->
 	<packaging>pom</packaging>
 
 	<name>SpringCloudExample</name>
@@ -124,6 +124,12 @@
 				<optional>true</optional>
 				<version>1.16.22</version>
 			</dependency>
+			<!--声明hutool util版本-->
+			<dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>5.2.5</version>
+            </dependency>
 		</dependencies>
 	</dependencyManagement>
 
