@@ -1,9 +1,11 @@
 package cn.zack.controller;
 
+import cn.zack.config.LogAnnotation;
 import cn.zack.feign.Microservice_Example_FeignClient;
 import cn.zack.pojo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.HashMap;
@@ -19,8 +21,10 @@ public class Microservice_Consumer_Controller {
     @Autowired
     private Microservice_Example_FeignClient microservice_example_feignClient;
 
+    @LogAnnotation(logType = "fun1日志")
     @GetMapping(path = "getFun1")
-    public String getFun1() {
+    public String getFun1(@RequestParam String username, @RequestParam String password) {
+        System.out.println("入参:\nusername=" + username + "\npassword=" + password);
         String s = microservice_example_feignClient.getFun1();
         return s;
     }
