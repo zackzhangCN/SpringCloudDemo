@@ -1,3 +1,3 @@
-### KafkaDemo
-学习Kafka的基本用法
+### SpringCloud Demo
+学习使用springcloud常用组件
 
